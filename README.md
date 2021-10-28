@@ -7,4 +7,5 @@ I have also added a text-file with meterId and "power"-factor in order to correc
 The meter.txt file is organized with each line containg the following:
 
 meterId<tab>powerFactor<tab>Comment
+
 Lines starting with #<tab> are ignored.
