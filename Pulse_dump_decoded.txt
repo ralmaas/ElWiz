@@ -1,0 +1,156 @@
+2.5 second: L1
+==============
+# Header
+00:	7EA.
+01:	.02A	# <=== 42 + 2 => 44 Bytes data 
+03:	410883130413E6E7000F400000000001
+
+# Elements in block
+19:	01	1 elements
+
+# Start of block structure:
+#1 powImpActive
+20:	020309060100010700FF
+30:	06	TYPE_UINT32
+31:	00000C0A		# <== data
+35:	02020F00161B
+
+# End
+41:	9BF57E
+
+
+10 second: L2
+=============
+Header:
+00:	7EA.
+01:	.10B	# <=== 267 + 2 => 269 Bytes of data
+03:	41088313FA7CE6E7000F400000000001 
+19:	0C	# <== 12 elements
+
+1 hour: L3
+==========
+Header:
+00:	7EA.
+01:	.177	# <=== 375 + 2 => 377 Bytes of data
+03:	41088313391EE6E7000F400000000001
+19:	11	# <== 17 elements or it could by 0x12 if L2 is reported
+
+# From here L2 and L3 have the same structure
+---------------------------------------------
+#1 - meterVersion
+20:	020209060101000281FF
+30:	0A	TYPE_STRING 
+31:	0B	12 characters
+32:	4149444F4E5F5630303031		# <== data
+#> A I D O N _ V 0 0 0 1
+
+#2 - meterId
+43:	020209060000600100FF
+53:	0A	TYPE_STRING
+54:	10	16 characters
+55:	30303030303030303030303030303030		# <== data
+#> 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+
+#3 - meterType
+71:	020209060000600107FF
+81:	0A	TYPE_STRING
+82:	04	4 characters
+83:	36353235		# <== data
+
+#4 - powImpActive
+87:	020309060100010700FF
+97:	06	TYPE_UINT32
+98:	00000C19		# <== data
+102:	02020F00161B
+
+#5 - powExpActive
+108:	020309060100020700FF
+118:	06	TYPE_UINT32
+119:	00000000		# <== data
+123:	02020F00161B
+
+#6 - powImpReactive
+129:	020309060100030700FF
+139:	06	TYPE_UINT32
+140:	00000000		# <== data
+144:	02020F00161D
+
+#7 - powExpReactive
+150:	020309060100040700FF
+160:	06	TYPE_UINT32
+161:	000000D1		# <== data
+165:	102020F00161D
+
+#8 - currentL1
+171:	0203090601001F0700FF
+181:	10	TYPE_INT16
+182:	0078		# <== data
+184:	02020F00161D
+
+#9 - currentL3									#9 - currentL2            
+190:	020309060100470700FF      190:	020309060100470700FF
+200:	10	TYPE_INT16            200:	10	TYPE_INT16      
+201:	0024		# <== data        201:	0024		# <== data  
+203:	02020FFF1621              203:	02020FFF1621        
+                          
+#10 - voltageL1                 #10 - currentL3 
+209:	020309060100200700FF      209:	020309060100200700FF
+219:	12	TYPE_UINT16           219:	10
+220:	0894		# <== data        220:	1234		# <== data
+222;	02020FFF1623              222:	02020FFF1623
+                          
+#11 - voltageL2                 #11 - voltageL1           
+228:	020309060100340700FF      228:	020309060100200700FF
+238:	12	TYPE_UINT16           238:	12	TYPE_UINT16     
+239:	08BD		# <== data        239:	0894		# <== data  
+241:	02020FFF1623              241;	02020FFF1623        
+                                                          
+#12 - voltageL3                 #12 - voltageL2           
+247:	020309060100480700FF      247:	020309060100340700FF
+257:	12	TYPE_UINT16           257:	12	TYPE_UINT16     
+258:	08E9		# <== data        258:	08BD		# <== data  
+260:	02020FFF1623              260:	02020FFF1623        
+                                                          
+# End of List 2                 #13 - voltageL3           
+266:	12427E                    266:	020309060100480700FF
+                                276:	12	TYPE_UINT16     
+                                277:	08E9		# <== data  
+                                279:	02020FFF1623        
+                             
+                                # End of List 2           
+                                285:	12427E              
+
+
+A List 3 have 5 more elements:
+#13 meterDate                		#14 meterDate                
+266	020209060000010000FF        285	020209060000010000FF     
+276	09 - Octet-String           295	09 - Octet-String        
+277	0C - 12 elements            296	0C - 12 elements         
+278	07E50A1201100000FF000000    297	07E50A1201100000FF000000 
+                                                             
+#14 cumuHourPowImpActive        #15 cumuHourPowImpActive     
+290	020309060100010800FF        309	020309060100010800FF     
+300	06 - UINT32                 319	06 - UINT32              
+301	0079EB05		# <== data      320	0079EB05		# <== data   
+305	02020F01161E                324	02020F01161E             
+                                                             
+#15 cumuHourPowExpActive        #16 cumuHourPowExpActive     
+311	020309060100020800FF        330	020309060100020800FF     
+321	06 - UINT32                 340	06 - UINT32              
+322	00000000		# <== data      341	00000000		# <== data   
+326	02020F01161E                345	02020F01161E             
+                                                             
+#16 cumuHourPowImpReactive      #17 cumuHourPowImpReactive   
+332	020309060100030800FF        351	020309060100030800FF     
+342	06 - UINT32                 361	06 - UINT32              
+243	0000E9BC		# <== data      362	0000E9BC		# <== data   
+347	02020F011620                366	02020F011620             
+                                                             
+#17 cumuHourPowExpReactive      #18 cumuHourPowExpReactive   
+253	020309060100040800FF        372	020309060100040800FF     
+363	06 - UINT32                 382	06 - UINT32              
+364	000A9B91		# <== data      383	00001183		# <== data   
+368	02020F011620                387	02020F011620             
+                                                             
+374	B3907E                      393	D0427E                   
+
