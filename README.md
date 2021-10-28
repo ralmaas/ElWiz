@@ -13,12 +13,17 @@ If the *meter.txt* file is missing the power factor will be set to 1.
 
 Lines starting with **#[tab]** are ignored.
 
-One small note:
+## One small note:
 
-I have not handled the small "bug" in line xx:
+I have not handled the small "bug" in line ??:
 
 **if (topic === "tibber") {**
 
-This topic text have to match the content of config.yaml !
+This topic (tibber) have to match the content in config.yaml !
 
 Here is the link to the **real** ElWiz: https://github.com/iotux/ElWiz
+
+Please check this site for more files and requirements including installation instructions.
+
+## Small note #2
+I have also enclosed my debugging file for locating the offset in the binary stream from the Pullse Unit.
