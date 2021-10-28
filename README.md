@@ -12,3 +12,13 @@ If the *meter.txt* file is missing the power factor will be set to 1.
 **meterId[tab]powerFactor[tab]Comment**
 
 Lines starting with **#[tab]** are ignored.
+
+One small note:
+
+I have not handled the small "bug" in line xx:
+
+**if (topic === "tibber") {**
+
+This topic text have to match the content of config.yaml !
+
+Here is the link to the **real** ElWiz: https://github.com/iotux/ElWiz
